@@ -1,0 +1,54 @@
+name: Surveillance logements CROUS
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: crous-monitor
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Installer les dépendances
+        run: pip install -r requirements.txt
+
+      - name: Vérifier les logements CROUS
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          CROUS_SEARCH_URLS: ${{ secrets.CROUS_SEARCH_URLS }}
+          MAX_PAGES: "10"
+          REQUEST_DELAY_SECONDS: "1.2"
+        run: python monitor.py
+
+      - name: Sauvegarder l'historique si nécessaire
+        run: |
+          if git diff --quiet -- data/seen_listings.json; then
+            echo "Aucun changement à enregistrer."
+            exit 0
+          fi
+
+          git config user.name "crous-monitor[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/seen_listings.json
+          git commit -m "chore: mise à jour des logements détectés"
+          git push
