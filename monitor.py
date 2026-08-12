@@ -56,8 +56,7 @@ def add_page_parameter(url: str, page: int) -> str:
     parts = urlsplit(url)
     pairs = [(key, value) for key, value in parse_qsl(parts.query, keep_blank_values=True) if key != "page"]
     pairs.append(("page", str(page)))
-    query = "&".join(f"{key}={value}" for key, value in pairs)
-    return urlunsplit((parts.scheme, parts.netloc, parts.path, query, parts.fragment))
+    return urlunsplit((parts.scheme, parts.netloc, parts.path, "&".join(f"{key}={value}" for key, value in pairs), parts.fragment))
 
 
 def listing_id(url: str) -> str:
@@ -182,9 +181,12 @@ def build_api_body(search_url: str, tool_id: int, page_number: int) -> dict:
     location_name = next((value for key, value in query_pairs if key == "locationName" and value), None)
     search_text = next((value for key, value in query_pairs if key in {"query", "search", "q", "keyword", "city"} and value), None)
 
-    selected_modes = [] if TEST_IGNORE_OCCUPATION else (occupation_modes or ["alone", "couple", "house_sharing"])
-    if TEST_IGNORE_OCCUPATION and occupation_modes:
-        logging.warning("MODE TEST ACTIF : occupationModes ignoré temporairement (%s)", occupation_modes)
+    if TEST_IGNORE_OCCUPATION:
+        selected_modes = ["alone", "couple", "house_sharing"]
+        if occupation_modes:
+            logging.warning("MODE TEST ACTIF : remplacement temporaire de %s par tous les modes", occupation_modes)
+    else:
+        selected_modes = occupation_modes or ["alone", "couple", "house_sharing"]
 
     body: dict = {
         "precision": 5, "need_aggregation": False, "page": page_number, "pageSize": 100,
@@ -199,12 +201,6 @@ def build_api_body(search_url: str, tool_id: int, page_number: int) -> dict:
     if accessibility is not None:
         body["accessibility"] = accessibility
 
-    recognized = {"page", "occupationModes", "bounds", "equipment", "priceMin", "priceMax", "minPrice", "maxPrice",
-                  "surfaceMin", "surfaceMax", "minSurface", "maxSurface", "accessibility", "pmr", "accessible",
-                  "query", "search", "q", "keyword", "city", "locationName", "precision", "pageSize"}
-    unknown = sorted({key for key, _ in query_pairs if key not in recognized})
-    if unknown:
-        logging.warning("Paramètres CROUS non reconnus et non transmis à l'API : %s", ", ".join(unknown))
     logging.info("Filtres API construits depuis l’URL : modes=%s bounds=%s price=%s area=%s accessibility=%s sector=%s locationName=%s",
                  body["occupationModes"], body.get("location"), body["price"], body.get("area"),
                  body.get("accessibility"), body.get("sector"), location_name)
@@ -246,13 +242,8 @@ def api_listing(item: dict, search_url: str, tool_id: int) -> dict | None:
     else:
         price = ""
     return {"uid": listing_id(url), "title": title[:160], "url": url, "price": price,
-            "surface": surface, "address": address[:220], "details": json.dumps(item, ensure_ascii=False)[:900], "source": search_url}
-
-
-def api_request(endpoint: str, body: dict) -> dict:
-    response = SESSION.post(endpoint, json=body, headers={"Accept": "application/ld+json, application/json"}, timeout=TIMEOUT_SECONDS)
-    response.raise_for_status()
-    return response.json()
+            "surface": surface, "address": address[:220], "details": json.dumps(item, ensure_ascii=False)[:900],
+            "source": search_url}
 
 
 def fetch_api_search(search_url: str) -> dict[str, dict]:
@@ -264,7 +255,11 @@ def fetch_api_search(search_url: str) -> dict[str, dict]:
     found: dict[str, dict] = {}
     for page_number in range(1, MAX_PAGES + 1):
         body = build_api_body(search_url, tool_id, page_number)
-        data = api_request(endpoint, body)
+        response = SESSION.post(endpoint, json=body,
+                                headers={"Accept": "application/ld+json, application/json"},
+                                timeout=TIMEOUT_SECONDS)
+        response.raise_for_status()
+        data = response.json()
         results = data.get("results") or {}
         items = results.get("items") or []
         total = results.get("total")
@@ -338,14 +333,12 @@ def send_listing(item: dict) -> None:
         fields.append({"name": "Surface", "value": item["surface"], "inline": True})
     if item["address"]:
         fields.append({"name": "Adresse", "value": item["address"], "inline": False})
-    post_discord({
-        "username": "Alerte CROUS",
-        "content": "@everyone 🏠 **Nouveau logement CROUS détecté !**",
-        "allowed_mentions": {"parse": ["everyone"]},
-        "embeds": [{"title": item["title"], "url": item["url"],
-                    "description": "Une nouvelle disponibilité correspond à ta recherche.\n**Ouvre immédiatement l’annonce.**",
-                    "fields": fields, "footer": {"text": "Surveillance planifiée toutes les 5 minutes"}}],
-    })
+    post_discord({"username": "Alerte CROUS", "content": "@everyone 🏠 **Nouveau logement CROUS détecté !**",
+                   "allowed_mentions": {"parse": ["everyone"]},
+                   "embeds": [{"title": item["title"], "url": item["url"],
+                               "description": "Une nouvelle disponibilité correspond à ta recherche.\n**Ouvre immédiatement l’annonce.**",
+                               "fields": fields,
+                               "footer": {"text": "Surveillance planifiée toutes les 5 minutes"}}]})
 
 
 def main() -> int:
@@ -354,10 +347,10 @@ def main() -> int:
     successful_searches = 0
     for search_url in get_search_urls():
         try:
-            listings, succeeded = fetch_search(search_url)
+            listings = fetch_search(search_url)[0]
             logging.info("Recherche %s : %d logement(s) récupéré(s)", search_url.split("/tools/")[-1], len(listings))
             current.update(listings)
-            successful_searches += int(succeeded)
+            successful_searches += 1
         except (requests.RequestException, ValueError, RuntimeError) as exc:
             logging.error("Recherche en échec : %s", exc)
     if successful_searches == 0:
