@@ -1,5 +1,337 @@
 {
   "initialized": true,
-  "last_current": [],
-  "seen": {}
+  "last_current": [
+    "000b9c3c4d96b98a6d48",
+    "060ca81fadd1deec0920",
+    "09fa1f0f4184a77e38aa",
+    "15ef50b57892a1e5e657",
+    "2093bed12b492e86dbd3",
+    "3171f258ab6d7cd371fe",
+    "36a4d79cea3f1ef71442",
+    "3ae34025118f2bcbc770",
+    "4154624911106c3c5d56",
+    "48b688f6d554185c4607",
+    "494aee8510427d78b49d",
+    "4c2f368cb5e0897b6be0",
+    "596d1e6f88729a56fe61",
+    "63027f703a8a93613fbf",
+    "69b0b7104ed192769a15",
+    "7058e37e600736f5fa0a",
+    "781a9f28d535ce9986cc",
+    "895410bf7c94862c39a1",
+    "89dcfdb4dce235205060",
+    "8ca2a9684da42d99144b",
+    "982277a88918446519f7",
+    "997f77ae30db02cc6254",
+    "a78a1f6e29529e591e4a",
+    "bd014ffb4575df5708fa",
+    "c96f3db6d4f07f43e482",
+    "cc4766c249679d35f741",
+    "e0c3a446b9a4b487173c",
+    "ebd9f381a29b12126108",
+    "ef23ac31c060191402a7",
+    "f3f852be6c249ab910d9"
+  ],
+  "seen": {
+    "000b9c3c4d96b98a6d48": {
+      "address": "12 place de l infanterie de marine 08140 BAZEILLES",
+      "details": "{\"code\": 1, \"reference\": \"2\", \"bedroomCount\": 1, \"id\": 1211, \"residence\": {\"publicTransports\": [], \"code\": 11, \"uairne\": \"0081094W\", \"address\": \"12 place de l infanterie de marine 08140 BAZEILLES\", \"parkings\": [{\"parking\": {\"name\": \"Stationnement urbain gratuit\", \"id\": \"10402a4e-fa98-11e7-89ed-005056940822\"}, \"description\": null, \"id\": \"ae34f1f4-1626-11e8-89ed-005056940822\"}], \"description\": \"<p>L&#39;abonnement et la consommation d&#39;&eacute;lectricit&eacute; ne sont pas inclus dans le loyer.</p>\\r\\n\\r\\n<p>WiFi (SmartCampus &amp; Eduroam)</p>\", \"location\": {\"lon\": 4.978, \"lat\": 49.675}, \"sharedTransports\": [], \"id\": \"70db76df-050d-11e8-89ed-005056940822\", \"entity\": {\"name\": \"Reims\", \"id\": 20}, \"medias\": [{\"src\": \"70db76df-050d-11e8-89ed-005056940822/5a8fca7dbf412-Bazeilles-facade.jpg\"}], \"label\": \"BAZEILLES\"}, \"bedCount\": 1, \"adaptedPmr\": false, \"roomCount\": 1, \"area\": {\"min\": 18.0, \"",
+      "price": "341.00 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "18.0 m²",
+      "title": "BAZEILLES — T1",
+      "uid": "000b9c3c4d96b98a6d48",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/1211"
+    },
+    "060ca81fadd1deec0920": {
+      "address": "18 AV. ALFRED SAUVY 66100 PERPIGNAN",
+      "details": "{\"code\": 434, \"reference\": \"2\", \"bedroomCount\": 1, \"id\": 1132, \"residence\": {\"publicTransports\": [{\"distance\": 2, \"unitOfMeasure\": \"on_foot\", \"description\": \"Bus 8 : arrêt cité universitaire / Bus 11 : arrêt IUT\", \"id\": \"696d2dc3-005b-11e8-89ed-005056940822\", \"publicTransport\": {\"name\": \"Bus\", \"id\": \"057fbe77-fa97-11e7-89ed-005056940822\"}}], \"code\": 22, \"uairne\": \"0660813A\", \"address\": \"18 AV. ALFRED SAUVY 66100 PERPIGNAN\", \"parkings\": [], \"description\": \"<p style=\\\"margin-left:0cm; margin-right:0cm\\\">&nbsp;</p>\\r\\n\\r\\n<p style=\\\"margin-left:0cm; margin-right:0cm\\\">R&eacute;sidence sur le campus de l&rsquo;Universit&eacute;.</p>\\r\\n\\r\\n<p style=\\\"margin-left:0cm; margin-right:0cm\\\">A proximit&eacute; imm&eacute;diate de l&rsquo;IUT, de l&rsquo;UPVD, proche du Lyc&eacute;e jean Lur&ccedil;at, de l&rsquo;IRTS et N&eacute;o sup, la r&eacute;sidence Mar I Sol se trouve &agrave; la jonction d",
+      "price": "392.02 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "30.0 m²",
+      "title": "RESIDENCE MAR I SOL — T1 Bis",
+      "uid": "060ca81fadd1deec0920",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/1132"
+    },
+    "09fa1f0f4184a77e38aa": {
+      "address": "18 Bis Avenue ALFRED SAUVY 66100 PERPIGNAN",
+      "details": "{\"code\": 390, \"reference\": \"2\", \"bedroomCount\": 1, \"id\": 182, \"residence\": {\"publicTransports\": [{\"distance\": 3, \"unitOfMeasure\": \"on_foot\", \"description\": \"Bus : 11 ou 8\", \"id\": \"15144346-00e9-11e8-89ed-005056940822\", \"publicTransport\": {\"name\": \"Bus\", \"id\": \"057fbe77-fa97-11e7-89ed-005056940822\"}}], \"code\": 27, \"uairne\": \"066001DG\", \"address\": \"18 Bis Avenue ALFRED SAUVY 66100 PERPIGNAN\", \"parkings\": [], \"description\": \"<p style=\\\"margin-left:0cm; margin-right:0cm\\\">&nbsp;</p>\\r\\n\\r\\n<p style=\\\"margin-left:0cm; margin-right:0cm\\\">R&eacute;sidence sur le campus de l&rsquo;Universit&eacute;.</p>\\r\\n\\r\\n<p style=\\\"margin-left:0cm; margin-right:0cm\\\">A proximit&eacute; imm&eacute;diate de l&rsquo;IUT, de l&rsquo;UPVD, proche du Lyc&eacute;e jean Lur&ccedil;at, de l&rsquo;IRTS et N&eacute;o sup, la r&eacute;sidence Canigou se trouve &agrave; la jonction d&rsquo;une riche zone commerciale et",
+      "price": "de 352.25 à 407.22 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "de 20.78 à 29.55 m²",
+      "title": "RESIDENCE CANIGOU — T1",
+      "uid": "09fa1f0f4184a77e38aa",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/182"
+    },
+    "15ef50b57892a1e5e657": {
+      "address": "22 avenue Jean Nicoli, BP 55, 20250 CORTE",
+      "details": "{\"code\": 41, \"reference\": \"2\", \"bedroomCount\": 1, \"id\": 1995, \"residence\": {\"publicTransports\": [], \"code\": 2, \"uairne\": \"7200005G\", \"address\": \"22 avenue Jean Nicoli, BP 55, 20250 CORTE\", \"parkings\": [], \"description\": \"<p>R&eacute;sidence situ&eacute;e sur le campus Grimaldi.</p>\\r\\n\\r\\n<p>Possibilit&eacute; d&#39;Allocation au Logement &agrave; caract&egrave;re Social (ALS).</p>\\r\\n\\r\\n<p><strong>NB : si moins de 20 ans &agrave; la condition de ne pas &ecirc;tre &agrave; charge sur les prestations CAF des parents </strong></p>\", \"location\": {\"lon\": 9.152, \"lat\": 42.3}, \"sharedTransports\": [], \"id\": \"4febd47d-1227-11e8-89ed-005056940822\", \"entity\": {\"name\": \"Corse\", \"id\": 12}, \"medias\": [{\"src\": \"4febd47d-1227-11e8-89ed-005056940822/626fda8aecc19-DSCF6418.JPG\"}, {\"src\": \"4febd47d-1227-11e8-89ed-005056940822/626fdab246b96-1.jpg\"}, {\"src\": \"4febd47d-1227-11e8-89ed-005056940822/62713815de",
+      "price": "269.00 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "de 14.0 à 17.9 m²",
+      "title": "Residence Pierrette Grimaldi — GRIMALDI CHAMBRE RENOVEE=> a 14 m2",
+      "uid": "15ef50b57892a1e5e657",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/1995"
+    },
+    "2093bed12b492e86dbd3": {
+      "address": "269 place de la caserne Bosquet 40000 MONT-DE-MARSAN",
+      "details": "{\"code\": 87, \"reference\": \"2\", \"bedroomCount\": 1, \"id\": 2608, \"residence\": {\"publicTransports\": [{\"distance\": 100, \"unitOfMeasure\": \"metre\", \"description\": \"Bus : Ligne 3 (réseau T.U.M.)\", \"id\": \"d7e075d1-fd36-11e7-89ed-005056940822\", \"publicTransport\": null}], \"code\": 31, \"uairne\": \"0401044T\", \"address\": \"269 place de la caserne Bosquet 40000 MONT-DE-MARSAN\", \"parkings\": [{\"parking\": {\"name\": \"Stationnement urbain gratuit\", \"id\": \"10402a4e-fa98-11e7-89ed-005056940822\"}, \"description\": null, \"id\": \"d7e090b2-fd36-11e7-89ed-005056940822\"}], \"description\": \"<p>En face de la M&eacute;diath&egrave;que de Mont de Marsan, la r&eacute;sidence universitaire Bosquet est situ&eacute;e &agrave; deux pas du centre ville, tr&egrave;s proche du lyc&eacute;e Victor Duruy.</p>\\r\\n\\r\\n<p>Logement b&eacute;n&eacute;ficiant de l&rsquo;APL (APL : aide personnalis&eacute;e au logement).</p>\", \"location\": {\"lo",
+      "price": "399.92 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "18.0 m²",
+      "title": "BOSQUET — T1",
+      "uid": "2093bed12b492e86dbd3",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/2608"
+    },
+    "3171f258ab6d7cd371fe": {
+      "address": "22 avenue Jean Nicoli, BP 55, 20250 CORTE",
+      "details": "{\"code\": 24, \"reference\": \"2\", \"bedroomCount\": 1, \"id\": 1458, \"residence\": {\"publicTransports\": [], \"code\": 13, \"uairne\": \"7200002G\", \"address\": \"22 avenue Jean Nicoli, BP 55, 20250 CORTE\", \"parkings\": [], \"description\": \"<p>R&eacute;sidence situ&eacute;e sur le Campus Grimaldi</p>\\r\\n\\r\\n<p>Possibilit&eacute; d&#39;Aide Personnalis&eacute;e au Logement (APL)<strong> =&gt; Attention : si moins de 20 ans &agrave; la condition de ne pas &ecirc;tre &agrave; charge sur les prestations CAF des parents </strong></p>\", \"location\": {\"lon\": 9.152, \"lat\": 42.3}, \"sharedTransports\": [], \"id\": \"50c905af-1227-11e8-89ed-005056940822\", \"entity\": {\"name\": \"Corse\", \"id\": 12}, \"medias\": [{\"src\": \"50c905af-1227-11e8-89ed-005056940822/626feedf70c4e-Pascal Martin.jpg\"}, {\"src\": \"50c905af-1227-11e8-89ed-005056940822/626feedf76cac-terrain de pétanque 2.jpg\"}], \"label\": \"Residence Pascal MARTIN\"}, \"bedCount\": 1",
+      "price": "430.00 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "de 16.0 à 18.0 m²",
+      "title": "Residence Pascal MARTIN — G024 STUDIO",
+      "uid": "3171f258ab6d7cd371fe",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/1458"
+    },
+    "36a4d79cea3f1ef71442": {
+      "address": "12 place de l infanterie de marine 08140 BAZEILLES",
+      "details": "{\"code\": 9, \"reference\": \"3\", \"bedroomCount\": 1, \"id\": 1224, \"residence\": {\"publicTransports\": [], \"code\": 11, \"uairne\": \"0081094W\", \"address\": \"12 place de l infanterie de marine 08140 BAZEILLES\", \"parkings\": [{\"parking\": {\"name\": \"Stationnement urbain gratuit\", \"id\": \"10402a4e-fa98-11e7-89ed-005056940822\"}, \"description\": null, \"id\": \"ae34f1f4-1626-11e8-89ed-005056940822\"}], \"description\": \"<p>L&#39;abonnement et la consommation d&#39;&eacute;lectricit&eacute; ne sont pas inclus dans le loyer.</p>\\r\\n\\r\\n<p>WiFi (SmartCampus &amp; Eduroam)</p>\", \"location\": {\"lon\": 4.978, \"lat\": 49.675}, \"sharedTransports\": [], \"id\": \"70db76df-050d-11e8-89ed-005056940822\", \"entity\": {\"name\": \"Reims\", \"id\": 20}, \"medias\": [{\"src\": \"70db76df-050d-11e8-89ed-005056940822/5a8fca7dbf412-Bazeilles-facade.jpg\"}], \"label\": \"BAZEILLES\"}, \"bedCount\": 2, \"adaptedPmr\": false, \"roomCount\": 1, \"area\": {\"min\": 21.0, \"",
+      "price": "426.00 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "21.0 m²",
+      "title": "BAZEILLES — T1Bis",
+      "uid": "36a4d79cea3f1ef71442",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/1224"
+    },
+    "3ae34025118f2bcbc770": {
+      "address": "Avenue du Commandant CLERE 40000 MONT-DE-MARSAN",
+      "details": "{\"code\": 83, \"reference\": \"2\", \"bedroomCount\": 1, \"id\": 506, \"residence\": {\"publicTransports\": [{\"distance\": 30, \"unitOfMeasure\": \"metre\", \"description\": \"Bus : Ligne 6 (réseau T.U.M.)\", \"id\": \"e1b10ca6-fd2c-11e7-89ed-005056940822\", \"publicTransport\": {\"name\": \"Bus\", \"id\": \"057fbe77-fa97-11e7-89ed-005056940822\"}}], \"code\": 26, \"uairne\": \"0400976U\", \"address\": \"Avenue du Commandant CLERE 40000 MONT-DE-MARSAN\", \"parkings\": [{\"parking\": {\"name\": \"Stationnement urbain gratuit\", \"id\": \"10402a4e-fa98-11e7-89ed-005056940822\"}, \"description\": \"La résidence dispose d'un parking privatif.\", \"id\": \"e1b124c2-fd2c-11e7-89ed-005056940822\"}], \"description\": \"<p>La r&eacute;sidence universitaire Le V&eacute;lum est situ&eacute;e &agrave; mi-chemin entre le centre ville et le lyc&eacute;e Charles DESPIAU.</p>\\r\\n\\r\\n<p>Logement b&eacute;n&eacute;ficiant de l&rsquo;APL (APL : aide personnalis&eacute;e au ",
+      "price": "403.91 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "19.0 m²",
+      "title": "LE VELUM — T1",
+      "uid": "3ae34025118f2bcbc770",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/506"
+    },
+    "4154624911106c3c5d56": {
+      "address": "22 avenue Jean Nicoli, BP 55, 20250 CORTE",
+      "details": "{\"code\": 37, \"reference\": \"2\", \"bedroomCount\": 1, \"id\": 2477, \"residence\": {\"publicTransports\": [], \"code\": 2, \"uairne\": \"7200005G\", \"address\": \"22 avenue Jean Nicoli, BP 55, 20250 CORTE\", \"parkings\": [], \"description\": \"<p>R&eacute;sidence situ&eacute;e sur le campus Grimaldi.</p>\\r\\n\\r\\n<p>Possibilit&eacute; d&#39;Allocation au Logement &agrave; caract&egrave;re Social (ALS).</p>\\r\\n\\r\\n<p><strong>NB : si moins de 20 ans &agrave; la condition de ne pas &ecirc;tre &agrave; charge sur les prestations CAF des parents </strong></p>\", \"location\": {\"lon\": 9.152, \"lat\": 42.3}, \"sharedTransports\": [], \"id\": \"4febd47d-1227-11e8-89ed-005056940822\", \"entity\": {\"name\": \"Corse\", \"id\": 12}, \"medias\": [{\"src\": \"4febd47d-1227-11e8-89ed-005056940822/626fda8aecc19-DSCF6418.JPG\"}, {\"src\": \"4febd47d-1227-11e8-89ed-005056940822/626fdab246b96-1.jpg\"}, {\"src\": \"4febd47d-1227-11e8-89ed-005056940822/62713815de",
+      "price": "204.00 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "de 9.9 à 11.9 m²",
+      "title": "Residence Pierrette Grimaldi — GRIMALDI CHAMBRE RENOVEE=> a 10 m2",
+      "uid": "4154624911106c3c5d56",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/2477"
+    },
+    "48b688f6d554185c4607": {
+      "address": "99-101 COURS DE LA MARNE 33000 BORDEAUX",
+      "details": "{\"code\": 42, \"reference\": \"3\", \"bedroomCount\": 1, \"id\": 365, \"residence\": {\"publicTransports\": [{\"distance\": 6, \"unitOfMeasure\": \"on_foot\", \"description\": \"Tram B : Arrêt Victoire\", \"id\": \"022e3ed4-ff7e-11e7-89ed-005056940822\", \"publicTransport\": {\"name\": \"Tramway\", \"id\": \"001ed50f-fa97-11e7-89ed-005056940822\"}}, {\"distance\": 6, \"unitOfMeasure\": \"on_foot\", \"description\": \"Lianes : 11, 15, 16, 24, 45\\r\\nArrêt Victoire MARNE\", \"id\": \"022e5303-ff7e-11e7-89ed-005056940822\", \"publicTransport\": {\"name\": \"Bus\", \"id\": \"057fbe77-fa97-11e7-89ed-005056940822\"}}, {\"distance\": 5, \"unitOfMeasure\": \"on_foot\", \"description\": \"Gare Saint Jean\", \"id\": \"f6059e7e-ff7e-11e7-89ed-005056940822\", \"publicTransport\": {\"name\": \"Train\", \"id\": \"0f830257-fa97-11e7-89ed-005056940822\"}}], \"code\": 15, \"uairne\": \"0332891N\", \"address\": \"99-101 COURS DE LA MARNE 33000 BORDEAUX\", \"parkings\": [{\"parking\": {\"name\": \"Stationne",
+      "price": "de 288.97 à 577.93 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "de 35.11 à 38.0 m²",
+      "title": "MARNE — T1BIS",
+      "uid": "48b688f6d554185c4607",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/365"
+    },
+    "494aee8510427d78b49d": {
+      "address": "21 Bis route de la Pomme 36100 ISSOUDUN",
+      "details": "{\"code\": 36, \"reference\": \"2\", \"bedroomCount\": 1, \"id\": 1623, \"residence\": {\"publicTransports\": [], \"code\": 20, \"uairne\": \"0360840T\", \"address\": \"21 Bis route de la Pomme 36100 ISSOUDUN\", \"parkings\": [{\"parking\": {\"name\": \"Stationnement urbain gratuit\", \"id\": \"10402a4e-fa98-11e7-89ed-005056940822\"}, \"description\": null, \"id\": \"1c99112b-0ff2-11e8-89ed-005056940822\"}], \"description\": \"<p>R&eacute;sidence proche de l&#39;IUT d&#39;Issoudun, &eacute;ligible &agrave; l&#39;APL. Nombreux services propos&eacute;s : laverie, local &agrave; v&eacute;los, salle commune, veilleur de nuit, acc&egrave;s internet en wifi inclus. Secr&eacute;tariat de la r&eacute;sidence situ&eacute; au restaurant universitaire le Castel&#39;RU - 78 espace Mend&egrave;s France. Contact : chateauroux@crous-orleans-tours.fr</p>\\r\\n\\r\\n<p>Visualisez les logements propos&eacute;s gr&acirc;ce &agrave; nos <a href=\\\"https://",
+      "price": "378.00 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "19.0 m²",
+      "title": "LES COINCHETTES — T1 19m2",
+      "uid": "494aee8510427d78b49d",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/1623"
+    },
+    "4c2f368cb5e0897b6be0": {
+      "address": "26 Avenue du 8 mai 1945 48000 Mende",
+      "details": "{\"code\": 483, \"reference\": \"1\", \"bedroomCount\": 1, \"id\": 2715, \"residence\": {\"publicTransports\": [], \"code\": 51, \"uairne\": \"0340095U\", \"address\": \"26 Avenue du 8 mai 1945 48000 Mende\", \"parkings\": [], \"description\": null, \"location\": {\"lon\": 3.498, \"lat\": 44.523}, \"sharedTransports\": [], \"id\": \"c8a99212-388b-11ec-b5ad-005056941f86\", \"entity\": {\"name\": \"Montpellier\", \"id\": 22}, \"medias\": [], \"label\": \"CITE DE MENDE\"}, \"bedCount\": 1, \"adaptedPmr\": false, \"roomCount\": 1, \"area\": {\"min\": 8.5, \"max\": 13.0}, \"label\": \"CHAMBRE SIMPLE\", \"indicators\": [{\"tool_id\": 22, \"highDemand\": false, \"lowStock\": false}, {\"tool_id\": 42, \"highDemand\": false, \"lowStock\": false}, {\"tool_id\": 47, \"highDemand\": false, \"lowStock\": false}], \"equipments\": [{\"id\": \"d0914ae7-fa0e-11e7-89ed-005056940822\", \"category\": \"Bâtiment\", \"label\": \"Frigo\"}], \"bookingData\": {\"amount\": 7000}, \"highDemand\": false, \"lowStock\": false,",
+      "price": "de 188.33 à 258.27 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "de 8.5 à 13.0 m²",
+      "title": "CITE DE MENDE — CHAMBRE SIMPLE",
+      "uid": "4c2f368cb5e0897b6be0",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/2715"
+    },
+    "596d1e6f88729a56fe61": {
+      "address": "22 avenue Jean Nicoli, BP 55, 20250 CORTE",
+      "details": "{\"code\": 36, \"reference\": \"2\", \"bedroomCount\": 1, \"id\": 910, \"residence\": {\"publicTransports\": [], \"code\": 2, \"uairne\": \"7200005G\", \"address\": \"22 avenue Jean Nicoli, BP 55, 20250 CORTE\", \"parkings\": [], \"description\": \"<p>R&eacute;sidence situ&eacute;e sur le campus Grimaldi.</p>\\r\\n\\r\\n<p>Possibilit&eacute; d&#39;Allocation au Logement &agrave; caract&egrave;re Social (ALS).</p>\\r\\n\\r\\n<p><strong>NB : si moins de 20 ans &agrave; la condition de ne pas &ecirc;tre &agrave; charge sur les prestations CAF des parents </strong></p>\", \"location\": {\"lon\": 9.152, \"lat\": 42.3}, \"sharedTransports\": [], \"id\": \"4febd47d-1227-11e8-89ed-005056940822\", \"entity\": {\"name\": \"Corse\", \"id\": 12}, \"medias\": [{\"src\": \"4febd47d-1227-11e8-89ed-005056940822/626fda8aecc19-DSCF6418.JPG\"}, {\"src\": \"4febd47d-1227-11e8-89ed-005056940822/626fdab246b96-1.jpg\"}, {\"src\": \"4febd47d-1227-11e8-89ed-005056940822/62713815de5",
+      "price": "237.00 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "de 12.0 à 14.0 m²",
+      "title": "Residence Pierrette Grimaldi — GRIMALDI CHAMBRE RENOVEE=> a 12 m2",
+      "uid": "596d1e6f88729a56fe61",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/910"
+    },
+    "63027f703a8a93613fbf": {
+      "address": "22, avenue Jean NICOLI, BP 55, 20250 CORTE",
+      "details": "{\"code\": 27, \"reference\": \"2\", \"bedroomCount\": 1, \"id\": 1521, \"residence\": {\"publicTransports\": [], \"code\": 9, \"uairne\": \"7200001B\", \"address\": \"22, avenue Jean NICOLI, BP 55, 20250 CORTE\", \"parkings\": [], \"description\": \"<p>R&eacute;sidence situ&eacute;e sur le Campus Mariani. A proximit&eacute; de la facult&eacute; de Droit et de Lettres, du Restaurant universitaire et de la Caf&eacute;t&eacute;ria.</p>\\r\\n\\r\\n<p>Possibilit&eacute; d&#39;Allocation de Logement Social (ALS).</p>\\r\\n\\r\\n<p><strong>NB : si moins de 20 ans &agrave; la condition de ne pas &ecirc;tre &agrave; charge sur les prestations CAF des parents </strong></p>\", \"location\": {\"lon\": 9.155442, \"lat\": 42.305046}, \"sharedTransports\": [], \"id\": \"513813b0-1227-11e8-89ed-005056940822\", \"entity\": {\"name\": \"Corse\", \"id\": 12}, \"medias\": [{\"src\": \"513813b0-1227-11e8-89ed-005056940822/5a8aeff781e1e-DSCF2470.jpg\"}, {\"src\": \"513813b0",
+      "price": "237.00 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "12.0 m²",
+      "title": "Residence Pascal Paoli 1 — PP1 CHAMBRE RENOVEE",
+      "uid": "63027f703a8a93613fbf",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/1521"
+    },
+    "69b0b7104ed192769a15": {
+      "address": "2/4/6 Rue du Dauphiné & 6/10/12 Rue de Bretagne 57970 YUTZ",
+      "details": "{\"code\": 145, \"reference\": \"9\", \"bedroomCount\": 3, \"id\": 2008, \"residence\": {\"publicTransports\": [{\"distance\": 2, \"unitOfMeasure\": \"on_foot\", \"description\": null, \"id\": \"f0ee625f-53a0-11e8-89ed-005056940822\", \"publicTransport\": {\"name\": \"Bus\", \"id\": \"057fbe77-fa97-11e7-89ed-005056940822\"}}], \"code\": 24, \"uairne\": \"057010DD\", \"address\": \"2/4/6 Rue du Dauphiné & 6/10/12 Rue de Bretagne 57970 YUTZ\", \"parkings\": [{\"parking\": {\"name\": \"Stationnement urbain gratuit\", \"id\": \"10402a4e-fa98-11e7-89ed-005056940822\"}, \"description\": null, \"id\": \"f0ee998c-53a0-11e8-89ed-005056940822\"}], \"description\": \"<p>Pour les logements en colocation, il revient aux potentiels futurs locataires de proposer un(e) colocataire lors de leur demande de logement &agrave; la r&eacute;sidence universitaire Jean Monnet.</p>\\r\\n\\r\\n<p>Pour cela, il suffit de r&eacute;pondre au mail qui vous sera adress&eacute; en indiquan",
+      "price": "335.08 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "95.0 m²",
+      "title": "CU DAUPHINE BRETAGNE — T4",
+      "uid": "69b0b7104ed192769a15",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/2008"
+    },
+    "7058e37e600736f5fa0a": {
+      "address": "17 Rue de Douaumont 57200 SARREGUEMINES",
+      "details": "{\"code\": 125, \"reference\": \"2\", \"bedroomCount\": 1, \"id\": 779, \"residence\": {\"publicTransports\": [{\"distance\": 1, \"unitOfMeasure\": \"on_foot\", \"description\": null, \"id\": \"7d3c94be-0479-11ee-bf9d-005056941f86\", \"publicTransport\": {\"name\": \"Bus\", \"id\": \"057fbe77-fa97-11e7-89ed-005056940822\"}}, {\"distance\": 25, \"unitOfMeasure\": \"on_foot\", \"description\": null, \"id\": \"7d3ca130-0479-11ee-bf9d-005056941f86\", \"publicTransport\": {\"name\": \"Train\", \"id\": \"0f830257-fa97-11e7-89ed-005056940822\"}}], \"code\": 17, \"uairne\": \"0573476U\", \"address\": \"17 Rue de Douaumont 57200 SARREGUEMINES\", \"parkings\": [{\"parking\": {\"name\": \"Stationnement urbain gratuit\", \"id\": \"10402a4e-fa98-11e7-89ed-005056940822\"}, \"description\": null, \"id\": \"47507d61-05f6-11ee-bf9d-005056941f86\"}, {\"parking\": {\"name\": \"Parking privatif\", \"id\": \"bd9a3ace-1b9e-11e8-89ed-005056940822\"}, \"description\": null, \"id\": \"47508800-05f6-11ee-bf9d-00",
+      "price": "437.20 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "20.0 m²",
+      "title": "CU DOUAUMONT — Studio type2",
+      "uid": "7058e37e600736f5fa0a",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/779"
+    },
+    "781a9f28d535ce9986cc": {
+      "address": "37 avenue clemenceau - 25200 MONTBELIARD",
+      "details": "{\"code\": 123, \"reference\": \"2\", \"bedroomCount\": 1, \"id\": 1306, \"residence\": {\"publicTransports\": [{\"distance\": 5, \"unitOfMeasure\": \"on_foot\", \"description\": null, \"id\": \"78423fb9-7886-11e9-a02d-005056941f86\", \"publicTransport\": {\"name\": \"Train\", \"id\": \"0f830257-fa97-11e7-89ed-005056940822\"}}, {\"distance\": 5, \"unitOfMeasure\": \"on_foot\", \"description\": \"Bus : Diam A - Diam B - 1 - 3 - 4 - 5 - 7 - 10 (Arrêt : René Thom)\", \"id\": \"784243b8-7886-11e9-a02d-005056941f86\", \"publicTransport\": {\"name\": \"Bus\", \"id\": \"057fbe77-fa97-11e7-89ed-005056940822\"}}], \"code\": 15, \"uairne\": \"0251834H\", \"address\": \"37 avenue clemenceau - 25200 MONTBELIARD\", \"parkings\": [], \"description\": \"<p><a href=\\\"http://www.crous-besancon.fr/logements/visites-virtuelles/\\\">http://www.crous-besancon.fr/logements/visites-virtuelles/</a> Localisation : La r&eacute;sidence Ren&eacute; Thom est situ&eacute;e au centre ville (au",
+      "price": "421.80 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "de 27.0 à 31.0 m²",
+      "title": "Residence René THOM — T1 BIS",
+      "uid": "781a9f28d535ce9986cc",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/1306"
+    },
+    "895410bf7c94862c39a1": {
+      "address": "38 Rue de Montjoly 08000 CHARLEVILLE MEZIERES",
+      "details": "{\"code\": 36, \"reference\": \"2\", \"bedroomCount\": 1, \"id\": 1567, \"residence\": {\"publicTransports\": [], \"code\": 10, \"uairne\": \"0081085L\", \"address\": \"38 Rue de Montjoly 08000 CHARLEVILLE MEZIERES\", \"parkings\": [], \"description\": \"<p>L&#39;abonnement et la consommation d&#39;&eacute;lectricit&eacute; ne sont pas inclus dans le loyer.</p>\\n\\n<p>Restaurant Universitaire sur place</p>\\n\\n<p>Parking R&eacute;sidence gratuit</p>\", \"location\": {\"lon\": 4.712, \"lat\": 49.773}, \"sharedTransports\": [], \"id\": \"77718a7b-050d-11e8-89ed-005056940822\", \"entity\": {\"name\": \"Reims\", \"id\": 20}, \"medias\": [{\"src\": \"77718a7b-050d-11e8-89ed-005056940822/6a50cf4563953777477500.jpg\"}, {\"src\": \"77718a7b-050d-11e8-89ed-005056940822/6a50ce67622de523132360.jpg\"}, {\"src\": \"77718a7b-050d-11e8-89ed-005056940822/6a22b1e2588e4930042725.jpg\"}], \"label\": \"MAISON DES ETUDIANTS\"}, \"bedCount\": 1, \"adaptedPmr\": false, \"roomCount\": ",
+      "price": "373.00 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "18.0 m²",
+      "title": "MAISON DES ETUDIANTS — T1",
+      "uid": "895410bf7c94862c39a1",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/1567"
+    },
+    "89dcfdb4dce235205060": {
+      "address": "Avenue Descartes 62219 LONGUENESSE",
+      "details": "{\"code\": 141, \"reference\": \"2\", \"bedroomCount\": 1, \"id\": 270, \"residence\": {\"publicTransports\": [], \"code\": 45, \"uairne\": \"0624432F\", \"address\": \"Avenue Descartes 62219 LONGUENESSE\", \"parkings\": [], \"description\": \"<p>R&eacute;sidence situ&eacute;e &agrave; Longuenesse, proche de l&#39;ISCID-CO, de l&#39;EILCO et du lyc&eacute;e Blaise Pascal, disposant d&#39;une laverie, d&#39;un parking, d&#39;un ascenseur, d&#39;un contr&ocirc;le d&rsquo;acc&egrave;s. Elle propose des studios pour 1 personnes, &eacute;quip&eacute;s d&#39;une salle de bains et d&#39;une kitchenette. La fourniture de l&#39;eau et de l&#39;&eacute;lectricit&eacute; et l&#39;abonnement internet sont compris dans les charges. Les logements donnent droit &agrave; l&#39;aide au logement personnalis&eacute;e (APL) vers&eacute;e par la CAF.</p>\\r\\n\\r\\n<p>Cette r&eacute;sidence est ouverte durant l&#39;&eacute;t&eacute;. Apr&eg",
+      "price": "461.83 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "25.0 m²",
+      "title": "Résidence Olympie — T1",
+      "uid": "89dcfdb4dce235205060",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/270"
+    },
+    "8ca2a9684da42d99144b": {
+      "address": "26 AVENUE ALFRED SAUVY 66870 PERPIGNAN CEDEX",
+      "details": "{\"code\": 416, \"reference\": \"2\", \"bedroomCount\": 1, \"id\": 2255, \"residence\": {\"publicTransports\": [{\"distance\": 2, \"unitOfMeasure\": \"on_foot\", \"description\": \"Bus 8 arrêt cité universitaire\", \"id\": \"5b78716a-ff88-11e7-89ed-005056940822\", \"publicTransport\": {\"name\": \"Bus\", \"id\": \"057fbe77-fa97-11e7-89ed-005056940822\"}}], \"code\": 23, \"uairne\": \"0660435P\", \"address\": \"26 AVENUE ALFRED SAUVY 66870 PERPIGNAN CEDEX\", \"parkings\": [], \"description\": \"<p style=\\\"margin-left:0cm; margin-right:0cm\\\">Situ&eacute;e sur le campus de l&rsquo;Universit&eacute;.</p>\\r\\n\\r\\n<p style=\\\"margin-left:0cm; margin-right:0cm\\\">A proximit&eacute; imm&eacute;diate de l&rsquo;IUT, de l&rsquo;UPVD, proche du Lyc&eacute;e jean Lur&ccedil;at, de l&rsquo;IRTS et N&eacute;o sup, la r&eacute;sidence TRAMUNTANA se trouve &agrave; la jonction d&rsquo;une riche zone commerciale et du quartier sud &laquo; le Moulin &agrave; V",
+      "price": "265.80 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "de 8.9 à 9.7 m²",
+      "title": "CITE MOULIN A VENT — Chambre",
+      "uid": "8ca2a9684da42d99144b",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/2255"
+    },
+    "982277a88918446519f7": {
+      "address": "41 bis Route d'Aubusson 23500 FELLETIN",
+      "details": "{\"code\": 67, \"reference\": \"2\", \"bedroomCount\": 1, \"id\": 3106, \"residence\": {\"publicTransports\": [], \"code\": 19, \"uairne\": \"0230578D\", \"address\": \"41 bis Route d'Aubusson 23500 FELLETIN\", \"parkings\": [], \"description\": \"<p>R&eacute;sidence situ&eacute;e dans l&#39;enceinte du lyc&eacute;e des m&eacute;tiers du b&acirc;timent proposant 38 T1, 17 T1Bis et 6 chambres simples (2 chambres par logement en colocation) Parking gratuit</p>\", \"location\": {\"lon\": 2.174, \"lat\": 45.889}, \"sharedTransports\": [], \"id\": \"f6cba354-0820-11e8-89ed-005056940822\", \"entity\": {\"name\": \"Limoges\", \"id\": 19}, \"medias\": [{\"src\": \"f6cba354-0820-11e8-89ed-005056940822/5a7c5d65df17c-IMG_1155.JPG\"}], \"label\": \"Résidence de Felletin\"}, \"bedCount\": 1, \"adaptedPmr\": false, \"roomCount\": 1, \"area\": {\"min\": 32.0, \"max\": 32.0}, \"label\": \"Felletin T1Bis seul\", \"indicators\": [{\"tool_id\": 22, \"highDemand\": false, \"lowStock\": fal",
+      "price": "415.00 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "32.0 m²",
+      "title": "Résidence de Felletin — Felletin T1Bis seul",
+      "uid": "982277a88918446519f7",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/3106"
+    },
+    "997f77ae30db02cc6254": {
+      "address": "22 avenue Jean Nicoli, BP 55, 20250 CORTE",
+      "details": "{\"code\": 46, \"reference\": \"2\", \"bedroomCount\": 1, \"id\": 2789, \"residence\": {\"publicTransports\": [], \"code\": 3, \"uairne\": \"7200004G\", \"address\": \"22 avenue Jean Nicoli, BP 55, 20250 CORTE\", \"parkings\": [], \"description\": \"<p>R&eacute;sidence situ&eacute;e sur le campus Grimaldi.</p>\\r\\n\\r\\n<p>Possibilit&eacute; d&#39;Aide Personnalis&eacute;e au Logement (APL).</p>\\r\\n\\r\\n<p><strong>NB : si moins de 20 ans &agrave; la condition de ne pas &ecirc;tre &agrave; charge sur les prestations CAF des parents </strong></p>\", \"location\": {\"lon\": 9.152, \"lat\": 42.299}, \"sharedTransports\": [], \"id\": \"5059e524-1227-11e8-89ed-005056940822\", \"entity\": {\"name\": \"Corse\", \"id\": 12}, \"medias\": [{\"src\": \"5059e524-1227-11e8-89ed-005056940822/627139f5a2505-planche.PNG\"}, {\"src\": \"5059e524-1227-11e8-89ed-005056940822/627139f5b0f3d-hall.jpg\"}, {\"src\": \"5059e524-1227-11e8-89ed-005056940822/627139f5b66e2-hall 2.jpg",
+      "price": "385.00 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "de 14.5 à 17.0 m²",
+      "title": "Residence Farrandu ETTORI — G020 STUDIO",
+      "uid": "997f77ae30db02cc6254",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/2789"
+    },
+    "a78a1f6e29529e591e4a": {
+      "address": "258 Chemin du Moulin à Vent Quartier Saint Cesaire 30 000 Nîmes",
+      "details": "{\"code\": 485, \"reference\": \"11\", \"bedroomCount\": 4, \"id\": 2754, \"residence\": {\"publicTransports\": [{\"distance\": 6, \"unitOfMeasure\": \"on_foot\", \"description\": \"Tram’bus ligne T2 (Arrêt Campus)\", \"id\": \"41d82d2f-c6d1-11ec-ae5f-005056941f86\", \"publicTransport\": {\"name\": \"Tramway\", \"id\": \"001ed50f-fa97-11e7-89ed-005056940822\"}}, {\"distance\": 8, \"unitOfMeasure\": \"on_foot\", \"description\": \"Bus ligne 5 direction CHU Caremeau\\r\\n(Arrêt IUT Dayan)\", \"id\": \"d16de7f9-c6ea-11ec-ae5f-005056941f86\", \"publicTransport\": {\"name\": \"Bus\", \"id\": \"057fbe77-fa97-11e7-89ed-005056940822\"}}], \"code\": 53, \"uairne\": \"0301889R\", \"address\": \"258 Chemin du Moulin à Vent Quartier Saint Cesaire 30 000 Nîmes\", \"parkings\": [], \"description\": \"<p>La r&eacute;sidence est situ&eacute;e au c&oelig;ur du quartier St C&eacute;saire, &agrave; proximit&eacute; de nombreuses structures universitaires, l&rsquo;IUT, l&rsquo;UFR de ",
+      "price": "333.11 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "de 63.4 à 69.8 m²",
+      "title": "RESIDENCE SAINT CESAIRE — T4 - Coloc",
+      "uid": "a78a1f6e29529e591e4a",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/2754"
+    },
+    "bd014ffb4575df5708fa": {
+      "address": "93 AV Francis PLANTE 40100 DAX",
+      "details": "{\"code\": 86, \"reference\": \"2\", \"bedroomCount\": 1, \"id\": 2558, \"residence\": {\"publicTransports\": [{\"distance\": 100, \"unitOfMeasure\": \"metre\", \"description\": \"Bus : Ligne 9 (réseau Urbus)\", \"id\": \"5dc0ca70-fd35-11e7-89ed-005056940822\", \"publicTransport\": {\"name\": \"Bus\", \"id\": \"057fbe77-fa97-11e7-89ed-005056940822\"}}], \"code\": 23, \"uairne\": \"0401001W\", \"address\": \"93 AV Francis PLANTE 40100 DAX\", \"parkings\": [{\"parking\": {\"name\": \"Stationnement urbain gratuit\", \"id\": \"10402a4e-fa98-11e7-89ed-005056940822\"}, \"description\": \"La résidence dispose d'un vaste parking privé.\", \"id\": \"5dc0e28b-fd35-11e7-89ed-005056940822\"}], \"description\": \"<p>Dans quartier calme, la r&eacute;sidence universitaire Andr&eacute; Malraux est situ&eacute;e &agrave; proximit&eacute; du lyc&eacute;e de Borda, &agrave; 3kms du lyc&eacute;e Cendrillon et &agrave; 6kms du lyc&eacute;e agricole.</p>\\r\\n\\r\\n<p>Logement b&eac",
+      "price": "346.74 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "18.0 m²",
+      "title": "ANDRE MALRAUX — T1",
+      "uid": "bd014ffb4575df5708fa",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/2558"
+    },
+    "c96f3db6d4f07f43e482": {
+      "address": "Avenue du Commandant CLERE 40000 MONT-DE-MARSAN",
+      "details": "{\"code\": 85, \"reference\": \"2\", \"bedroomCount\": 1, \"id\": 516, \"residence\": {\"publicTransports\": [{\"distance\": 30, \"unitOfMeasure\": \"metre\", \"description\": \"Bus : Ligne 6 (réseau T.U.M.)\", \"id\": \"e1b10ca6-fd2c-11e7-89ed-005056940822\", \"publicTransport\": {\"name\": \"Bus\", \"id\": \"057fbe77-fa97-11e7-89ed-005056940822\"}}], \"code\": 26, \"uairne\": \"0400976U\", \"address\": \"Avenue du Commandant CLERE 40000 MONT-DE-MARSAN\", \"parkings\": [{\"parking\": {\"name\": \"Stationnement urbain gratuit\", \"id\": \"10402a4e-fa98-11e7-89ed-005056940822\"}, \"description\": \"La résidence dispose d'un parking privatif.\", \"id\": \"e1b124c2-fd2c-11e7-89ed-005056940822\"}], \"description\": \"<p>La r&eacute;sidence universitaire Le V&eacute;lum est situ&eacute;e &agrave; mi-chemin entre le centre ville et le lyc&eacute;e Charles DESPIAU.</p>\\r\\n\\r\\n<p>Logement b&eacute;n&eacute;ficiant de l&rsquo;APL (APL : aide personnalis&eacute;e au ",
+      "price": "493.20 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "29.0 m²",
+      "title": "LE VELUM — T1BIS PMR",
+      "uid": "c96f3db6d4f07f43e482",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/516"
+    },
+    "cc4766c249679d35f741": {
+      "address": "63 CHEMIN DE LA PASSIO VELLA 66100 PERPIGNAN",
+      "details": "{\"code\": 436, \"reference\": \"2\", \"bedroomCount\": 1, \"id\": 832, \"residence\": {\"publicTransports\": [{\"distance\": 3, \"unitOfMeasure\": \"on_foot\", \"description\": \"Bus 8 : arrêt cité universitaire / Bus 11 : arrêt IUT\", \"id\": \"747d6a20-00ff-11e8-89ed-005056940822\", \"publicTransport\": {\"name\": \"Bus\", \"id\": \"057fbe77-fa97-11e7-89ed-005056940822\"}}], \"code\": 21, \"uairne\": \"0660814B\", \"address\": \"63 CHEMIN DE LA PASSIO VELLA 66100 PERPIGNAN\", \"parkings\": [], \"description\": \"<p style=\\\"margin-left:0cm; margin-right:0cm\\\">R&eacute;sidence sur le campus de l&rsquo;Universit&eacute;.</p>\\r\\n\\r\\n<p style=\\\"margin-left:0cm; margin-right:0cm\\\">A proximit&eacute; imm&eacute;diate de l&rsquo;IUT, de l&rsquo;UPVD, proche du Lyc&eacute;e jean Lur&ccedil;at, de l&rsquo;IRTS et N&eacute;o sup, la r&eacute;sidence TRAMUNTANA se trouve &agrave; la jonction d&rsquo;une riche zone commerciale et du quartier sud &la",
+      "price": "340.55 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "22.0 m²",
+      "title": "RESIDENCE TRAMUNTANA — T1",
+      "uid": "cc4766c249679d35f741",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/832"
+    },
+    "e0c3a446b9a4b487173c": {
+      "address": "Avenue du Commandant CLERE 40000 MONT-DE-MARSAN",
+      "details": "{\"code\": 84, \"reference\": \"7\", \"bedroomCount\": 2, \"id\": 522, \"residence\": {\"publicTransports\": [{\"distance\": 30, \"unitOfMeasure\": \"metre\", \"description\": \"Bus : Ligne 6 (réseau T.U.M.)\", \"id\": \"e1b10ca6-fd2c-11e7-89ed-005056940822\", \"publicTransport\": {\"name\": \"Bus\", \"id\": \"057fbe77-fa97-11e7-89ed-005056940822\"}}], \"code\": 26, \"uairne\": \"0400976U\", \"address\": \"Avenue du Commandant CLERE 40000 MONT-DE-MARSAN\", \"parkings\": [{\"parking\": {\"name\": \"Stationnement urbain gratuit\", \"id\": \"10402a4e-fa98-11e7-89ed-005056940822\"}, \"description\": \"La résidence dispose d'un parking privatif.\", \"id\": \"e1b124c2-fd2c-11e7-89ed-005056940822\"}], \"description\": \"<p>La r&eacute;sidence universitaire Le V&eacute;lum est situ&eacute;e &agrave; mi-chemin entre le centre ville et le lyc&eacute;e Charles DESPIAU.</p>\\r\\n\\r\\n<p>Logement b&eacute;n&eacute;ficiant de l&rsquo;APL (APL : aide personnalis&eacute;e au ",
+      "price": "246.61 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "29.0 m²",
+      "title": "LE VELUM — T1BIS",
+      "uid": "e0c3a446b9a4b487173c",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/522"
+    },
+    "ebd9f381a29b12126108": {
+      "address": "Av. Michel Serres 47000 AGEN",
+      "details": "{\"code\": 129, \"reference\": \"2\", \"bedroomCount\": 1, \"id\": 2169, \"residence\": {\"publicTransports\": [{\"distance\": 1, \"unitOfMeasure\": \"on_foot\", \"description\": \"Lignes 1,5 et 8\", \"id\": \"1ab8db93-01dd-11e8-89ed-005056940822\", \"publicTransport\": {\"name\": \"Bus\", \"id\": \"057fbe77-fa97-11e7-89ed-005056940822\"}}], \"code\": 36, \"uairne\": \"0471023G\", \"address\": \"Av. Michel Serres 47000 AGEN\", \"parkings\": [], \"description\": \"<p>A c&ocirc;t&eacute; des IUT et du DUSA.</p>\\r\\n\\r\\n<p>T1bis avec 1 lit 2 places.</p>\", \"location\": {\"lon\": 0.624, \"lat\": 44.185}, \"sharedTransports\": [], \"id\": \"f8ed1110-fc8e-11e7-89ed-005056940822\", \"entity\": {\"name\": \"Bordeaux\", \"id\": 4}, \"medias\": [{\"src\": \"f8ed1110-fc8e-11e7-89ed-005056940822/62567c30c7382-Exterieur_2_la_cressonniere.jpg\"}, {\"src\": \"f8ed1110-fc8e-11e7-89ed-005056940822/5a69eb2dbdd26-La Cressonnière.jpg\"}], \"label\": \"CRESSONNIERE\"}, \"bedCount\": 1, \"adaptedPm",
+      "price": "420.28 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "20.0 m²",
+      "title": "CRESSONNIERE — T1 PMR",
+      "uid": "ebd9f381a29b12126108",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/2169"
+    },
+    "ef23ac31c060191402a7": {
+      "address": "Av. Michel Serres 47000 AGEN",
+      "details": "{\"code\": 91, \"reference\": \"2\", \"bedroomCount\": 1, \"id\": 2147, \"residence\": {\"publicTransports\": [{\"distance\": 1, \"unitOfMeasure\": \"on_foot\", \"description\": \"Lignes 1,5 et 8\", \"id\": \"1ab8db93-01dd-11e8-89ed-005056940822\", \"publicTransport\": {\"name\": \"Bus\", \"id\": \"057fbe77-fa97-11e7-89ed-005056940822\"}}], \"code\": 36, \"uairne\": \"0471023G\", \"address\": \"Av. Michel Serres 47000 AGEN\", \"parkings\": [], \"description\": \"<p>A c&ocirc;t&eacute; des IUT et du DUSA.</p>\\r\\n\\r\\n<p>T1bis avec 1 lit 2 places.</p>\", \"location\": {\"lon\": 0.624, \"lat\": 44.185}, \"sharedTransports\": [], \"id\": \"f8ed1110-fc8e-11e7-89ed-005056940822\", \"entity\": {\"name\": \"Bordeaux\", \"id\": 4}, \"medias\": [{\"src\": \"f8ed1110-fc8e-11e7-89ed-005056940822/62567c30c7382-Exterieur_2_la_cressonniere.jpg\"}, {\"src\": \"f8ed1110-fc8e-11e7-89ed-005056940822/5a69eb2dbdd26-La Cressonnière.jpg\"}], \"label\": \"CRESSONNIERE\"}, \"bedCount\": 1, \"adaptedPmr",
+      "price": "420.28 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "18.0 m²",
+      "title": "CRESSONNIERE — T1",
+      "uid": "ef23ac31c060191402a7",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/2147"
+    },
+    "f3f852be6c249ab910d9": {
+      "address": "37 avenue clemenceau - 25200 MONTBELIARD",
+      "details": "{\"code\": 83, \"reference\": \"2\", \"bedroomCount\": 1, \"id\": 1301, \"residence\": {\"publicTransports\": [{\"distance\": 5, \"unitOfMeasure\": \"on_foot\", \"description\": null, \"id\": \"78423fb9-7886-11e9-a02d-005056941f86\", \"publicTransport\": {\"name\": \"Train\", \"id\": \"0f830257-fa97-11e7-89ed-005056940822\"}}, {\"distance\": 5, \"unitOfMeasure\": \"on_foot\", \"description\": \"Bus : Diam A - Diam B - 1 - 3 - 4 - 5 - 7 - 10 (Arrêt : René Thom)\", \"id\": \"784243b8-7886-11e9-a02d-005056941f86\", \"publicTransport\": {\"name\": \"Bus\", \"id\": \"057fbe77-fa97-11e7-89ed-005056940822\"}}], \"code\": 15, \"uairne\": \"0251834H\", \"address\": \"37 avenue clemenceau - 25200 MONTBELIARD\", \"parkings\": [], \"description\": \"<p><a href=\\\"http://www.crous-besancon.fr/logements/visites-virtuelles/\\\">http://www.crous-besancon.fr/logements/visites-virtuelles/</a> Localisation : La r&eacute;sidence Ren&eacute; Thom est situ&eacute;e au centre ville (au ",
+      "price": "362.20 €",
+      "source": "https://trouverunlogement.lescrous.fr/tools/47/search?occupationModes=alone&bounds=5.2286902_43.3910329_5.5324758_43.1696205&locationName=Marseille+%2813000%29",
+      "surface": "24.0 m²",
+      "title": "Residence René THOM — T1",
+      "uid": "f3f852be6c249ab910d9",
+      "url": "https://trouverunlogement.lescrous.fr/tools/47/accommodations/1301"
+    }
+  }
 }
