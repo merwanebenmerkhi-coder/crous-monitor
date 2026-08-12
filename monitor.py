@@ -29,7 +29,7 @@ logging.basicConfig(
 SESSION = requests.Session()
 SESSION.headers.update(
     {
-        "User-Agent": "CrousDiscordMonitor/4.1 (personal availability notifier)",
+        "User-Agent": "CrousDiscordMonitor/4.0 (personal availability notifier)",
         "Accept-Language": "fr-FR,fr;q=0.9,en;q=0.7",
         "Cache-Control": "no-cache",
     }
@@ -168,7 +168,7 @@ def parse_list_values(pairs: list[tuple[str, str]], key: str) -> list[str]:
 
 
 def parse_bounds(value: str | None) -> list[dict[str, float]] | None:
-    """Convert CROUS bounds=minLon_maxLat_maxLon_minLat into API SW/NE points."""
+    """Convert the CROUS bounds directly, preserving west-north then east-south order."""
     if not value:
         return None
     parts = value.split("_")
@@ -177,12 +177,10 @@ def parse_bounds(value: str | None) -> list[dict[str, float]] | None:
     coords = [parse_float(part) for part in parts]
     if any(coord is None for coord in coords):
         return None
-
-    # Frontend format: minLon_maxLat_maxLon_minLat.
     min_lon, max_lat, max_lon, min_lat = coords
     return [
-        {"lon": min_lon, "lat": min_lat},
-        {"lon": max_lon, "lat": max_lat},
+        {"lon": min_lon, "lat": max_lat},
+        {"lon": max_lon, "lat": min_lat},
     ]
 
 
@@ -215,8 +213,6 @@ def build_api_body(search_url: str, tool_id: int, page_number: int) -> dict:
     if accessibility is None:
         accessibility = pmr
 
-    # locationName is the frontend's human-readable label for the selected area.
-    # The actual geographic constraint is encoded in bounds, which is what the API uses.
     location_name = next(
         (value for key, value in query_pairs if key == "locationName" and value),
         None,
@@ -249,7 +245,10 @@ def build_api_body(search_url: str, tool_id: int, page_number: int) -> dict:
     }
 
     if surface_min is not None or surface_max is not None:
-        body["area"] = {"min": surface_min, "max": surface_max}
+        body["area"] = {
+            "min": surface_min,
+            "max": surface_max,
+        }
 
     if accessibility is not None:
         body["accessibility"] = accessibility
@@ -279,12 +278,12 @@ def build_api_body(search_url: str, tool_id: int, page_number: int) -> dict:
         "accessibility",
         "pmr",
         "accessible",
-        "locationName",
         "query",
         "search",
         "q",
         "keyword",
         "city",
+        "locationName",
         "precision",
         "pageSize",
     }
