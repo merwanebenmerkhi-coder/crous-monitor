@@ -15,7 +15,7 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 4
+    timeout-minutes: 6
 
     steps:
       - name: Récupérer le dépôt
@@ -30,16 +30,18 @@ jobs:
           cache: pip
 
       - name: Installer les dépendances
-        run: pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
 
-      - name: Vérifier les logements CROUS
+      - name: Vérifier les logements CROUS avec navigateur
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           CROUS_SEARCH_URLS: ${{ secrets.CROUS_SEARCH_URLS }}
-          MAX_PAGES: "10"
+          CROUS_STORAGE_STATE_B64: ${{ secrets.CROUS_STORAGE_STATE_B64 }}
           REQUEST_DELAY_SECONDS: "1.2"
-          TEST_IGNORE_OCCUPATION: "false"
-        run: python monitor.py
+          TIMEOUT_SECONDS: "30"
+        run: python playwright_monitor.py
 
       - name: Sauvegarder l'historique si nécessaire
         run: |
