@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       test_ignore_occupation:
-        description: "Test temporaire : remplacer occupationModes par tous les modes"
+        description: "Test temporaire : ignorer occupationModes"
         required: false
         default: false
         type: boolean
@@ -38,7 +38,7 @@ jobs:
       - name: Installer les dépendances
         run: pip install -r requirements.txt
 
-      - name: Diagnostic automatique sans zone (lancement manuel uniquement)
+      - name: Diagnostic logements sans zone (lancement manuel uniquement)
         if: ${{ github.event_name == 'workflow_dispatch' }}
         env:
           CROUS_SEARCH_URLS: ${{ secrets.CROUS_SEARCH_URLS }}
@@ -49,9 +49,16 @@ jobs:
           from urllib.parse import urlsplit
 
           urls = [u.strip() for u in os.environ["CROUS_SEARCH_URLS"].splitlines() if u.strip()]
+          if not urls:
+              raise SystemExit("CROUS_SEARCH_URLS vide")
+
           for search_url in urls:
               parts = urlsplit(search_url).path.strip("/").split("/")
-              tool_id = int(parts[1])
+              try:
+                  tool_id = int(parts[1])
+              except (IndexError, ValueError):
+                  raise SystemExit(f"URL CROUS invalide : {search_url}")
+
               endpoint = f"https://trouverunlogement.lescrous.fr/api/fr/search/{tool_id}"
               body = {
                   "precision": 5,
@@ -60,11 +67,12 @@ jobs:
                   "pageSize": 100,
                   "sector": None,
                   "idTool": tool_id,
-                  "occupationModes": ["alone"],
+                  "occupationModes": ["alone", "couple", "house_sharing"],
                   "equipment": [],
                   "price": {"min": 0, "max": None},
                   "location": None,
               }
+
               response = requests.post(
                   endpoint,
                   json=body,
@@ -75,9 +83,11 @@ jobs:
                   timeout=25,
               )
               response.raise_for_status()
-              results = response.json().get("results") or {}
+              data = response.json()
+              results = data.get("results") or {}
               items = results.get("items") or []
               print(f"DIAGNOSTIC SANS BOUNDS | tool={tool_id} | total={results.get('total')} | items={len(items)}")
+
               for i, item in enumerate(items[:40], 1):
                   residence = item.get("residence") or {}
                   label = residence.get("label") or item.get("label") or "?"
