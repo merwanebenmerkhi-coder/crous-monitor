@@ -20,6 +20,7 @@ TOOL_PATTERN = re.compile(r"/tools/(\d+)/search(?:/|$)", re.IGNORECASE)
 MAX_PAGES = int(os.getenv("MAX_PAGES", "10"))
 REQUEST_DELAY_SECONDS = float(os.getenv("REQUEST_DELAY_SECONDS", "1.2"))
 TIMEOUT_SECONDS = int(os.getenv("TIMEOUT_SECONDS", "25"))
+DEBUG_DIAGNOSTICS = os.getenv("DEBUG_CROUS_DIAGNOSTICS", "0") == "1"
 
 logging.basicConfig(
     level=os.getenv("LOG_LEVEL", "INFO"),
@@ -29,7 +30,7 @@ logging.basicConfig(
 SESSION = requests.Session()
 SESSION.headers.update(
     {
-        "User-Agent": "CrousDiscordMonitor/4.1 (personal availability notifier)",
+        "User-Agent": "CrousDiscordMonitor/4.0 (personal availability notifier)",
         "Accept-Language": "fr-FR,fr;q=0.9,en;q=0.7",
         "Cache-Control": "no-cache",
     }
@@ -168,7 +169,7 @@ def parse_list_values(pairs: list[tuple[str, str]], key: str) -> list[str]:
 
 
 def parse_bounds(value: str | None) -> list[dict[str, float]] | None:
-    """Preserve the CROUS frontend bounds order: west/north then east/south."""
+    """Convert CROUS bounds directly, preserving west-north then east-south order."""
     if not value:
         return None
     parts = value.split("_")
@@ -185,6 +186,7 @@ def parse_bounds(value: str | None) -> list[dict[str, float]] | None:
 
 
 def build_api_body(search_url: str, tool_id: int, page_number: int) -> dict:
+    """Convert CROUS search URL query parameters into the internal API request body."""
     query_pairs = parse_qsl(urlsplit(search_url).query, keep_blank_values=True)
 
     occupation_modes = parse_list_values(query_pairs, "occupationModes")
@@ -225,14 +227,13 @@ def build_api_body(search_url: str, tool_id: int, page_number: int) -> dict:
         ),
         None,
     )
-    sector = search_text
 
     body: dict = {
         "precision": 5,
         "need_aggregation": False,
         "page": page_number,
         "pageSize": 100,
-        "sector": sector,
+        "sector": search_text,
         "idTool": tool_id,
         "occupationModes": occupation_modes or ["alone", "couple", "house_sharing"],
         "equipment": equipment,
@@ -249,7 +250,10 @@ def build_api_body(search_url: str, tool_id: int, page_number: int) -> dict:
     if accessibility is not None:
         body["accessibility"] = accessibility
 
-    for url_key, body_key, caster in (("precision", "precision", parse_int), ("pageSize", "pageSize", parse_int)):
+    for url_key, body_key, caster in (
+        ("precision", "precision", parse_int),
+        ("pageSize", "pageSize", parse_int),
+    ):
         raw = next((value for key, value in query_pairs if key == url_key), None)
         converted = caster(raw)
         if converted is not None:
@@ -263,12 +267,20 @@ def build_api_body(search_url: str, tool_id: int, page_number: int) -> dict:
     }
     unknown = sorted({key for key, _ in query_pairs if key not in recognized})
     if unknown:
-        logging.warning("Paramètres CROUS non reconnus et non transmis à l'API : %s", ", ".join(unknown))
+        logging.warning(
+            "Paramètres CROUS non reconnus et non transmis à l'API : %s",
+            ", ".join(unknown),
+        )
 
     logging.info(
         "Filtres API construits depuis l’URL : modes=%s bounds=%s price=%s area=%s accessibility=%s sector=%s locationName=%s",
-        body["occupationModes"], body.get("location"), body["price"], body.get("area"),
-        body.get("accessibility"), body.get("sector"), location_name,
+        body["occupationModes"],
+        body.get("location"),
+        body["price"],
+        body.get("area"),
+        body.get("accessibility"),
+        body.get("sector"),
+        location_name,
     )
     return body
 
@@ -336,7 +348,7 @@ def api_request(endpoint: str, body: dict) -> dict:
 
 
 def diagnostic_zero_result(search_url: str, tool_id: int, body: dict) -> None:
-    """When exact filters return zero, test individual constraints so the failing one is visible in logs."""
+    """Optional diagnostics for debugging an exact zero-result search."""
     diagnostics = [
         ("exact", body),
         ("sans occupationModes", {**body, "occupationModes": ["alone", "couple", "house_sharing"]}),
@@ -346,10 +358,7 @@ def diagnostic_zero_result(search_url: str, tool_id: int, body: dict) -> None:
             "occupationModes": ["alone", "couple", "house_sharing"],
             "location": None,
         }),
-        ("location inversee", {
-            **body,
-            "location": list(reversed(body.get("location") or [])),
-        }),
+        ("location inversee", {**body, "location": list(reversed(body.get("location") or []))}),
         ("sans filtres prix/zone/surface", {
             **body,
             "occupationModes": ["alone", "couple", "house_sharing"],
@@ -375,8 +384,7 @@ def diagnostic_zero_result(search_url: str, tool_id: int, body: dict) -> None:
 def fetch_api_search(search_url: str) -> dict[str, dict]:
     tool_id = extract_tool_id(search_url)
     if tool_id is None:
-        logging.warning("Impossible de déterminer l'id du moteur CROUS : %s", search_url)
-        return {}
+        raise RuntimeError(f"Impossible de déterminer l'id du moteur CROUS : {search_url}")
 
     endpoint = f"{BASE_URL}/api/fr/search/{tool_id}"
     found: dict[str, dict] = {}
@@ -387,9 +395,15 @@ def fetch_api_search(search_url: str) -> dict[str, dict]:
         results = data.get("results") or {}
         items = results.get("items") or []
         total = results.get("total")
-        logging.info("API CROUS tool=%s page=%s : %d logement(s) total=%s", tool_id, page_number, len(items), total)
+        logging.info(
+            "API CROUS tool=%s page=%s : %d logement(s) total=%s",
+            tool_id,
+            page_number,
+            len(items),
+            total,
+        )
 
-        if page_number == 1 and not items:
+        if DEBUG_DIAGNOSTICS and page_number == 1 and not items:
             diagnostic_zero_result(search_url, tool_id, body)
 
         for raw_item in items:
@@ -438,7 +452,9 @@ def fetch_search(search_url: str) -> tuple[dict[str, dict], bool]:
 
         logging.warning(
             "HTML CROUS sans annonce : status=%s, bytes=%d, page=%s",
-            response.status_code, len(response.content), page_number,
+            response.status_code,
+            len(response.content),
+            page_number,
         )
         break
 
@@ -446,17 +462,9 @@ def fetch_search(search_url: str) -> tuple[dict[str, dict], bool]:
         return found, True
 
     logging.info("Tentative de récupération via l'API interne CROUS...")
+    # A valid API response with zero matching accommodations is still a successful search.
     api_found = fetch_api_search(search_url)
-    if api_found:
-        return api_found, True
-
-    if html_succeeded:
-        return found, True
-
-    raise RuntimeError(
-        "Le CROUS répond mais aucune annonce n'a pu être extraite. "
-        "La page peut nécessiter une authentification ou la structure/API a changé."
-    )
+    return api_found, True
 
 
 def load_state() -> dict:
@@ -474,7 +482,11 @@ def save_state(state: dict) -> None:
 
 
 def post_discord(payload: dict) -> None:
-    response = requests.post(required_env("DISCORD_WEBHOOK_URL"), json=payload, timeout=TIMEOUT_SECONDS)
+    response = requests.post(
+        required_env("DISCORD_WEBHOOK_URL"),
+        json=payload,
+        timeout=TIMEOUT_SECONDS,
+    )
     response.raise_for_status()
 
 
@@ -487,18 +499,25 @@ def send_listing(item: dict) -> None:
     if item["address"]:
         fields.append({"name": "Adresse", "value": item["address"], "inline": False})
 
-    post_discord({
-        "username": "Alerte CROUS",
-        "content": "@everyone 🏠 **Nouveau logement CROUS détecté !**",
-        "allowed_mentions": {"parse": ["everyone"]},
-        "embeds": [{
-            "title": item["title"],
-            "url": item["url"],
-            "description": "Une nouvelle disponibilité correspond à ta recherche.\n**Ouvre immédiatement l’annonce.**",
-            "fields": fields,
-            "footer": {"text": "Surveillance planifiée toutes les 5 minutes"},
-        }],
-    })
+    post_discord(
+        {
+            "username": "Alerte CROUS",
+            "content": "@everyone 🏠 **Nouveau logement CROUS détecté !**",
+            "allowed_mentions": {"parse": ["everyone"]},
+            "embeds": [
+                {
+                    "title": item["title"],
+                    "url": item["url"],
+                    "description": (
+                        "Une nouvelle disponibilité correspond à ta recherche.\n"
+                        "**Ouvre immédiatement l’annonce.**"
+                    ),
+                    "fields": fields,
+                    "footer": {"text": "Surveillance planifiée toutes les 5 minutes"},
+                }
+            ],
+        }
+    )
 
 
 def main() -> int:
@@ -509,7 +528,11 @@ def main() -> int:
     for search_url in get_search_urls():
         try:
             listings, succeeded = fetch_search(search_url)
-            logging.info("Recherche %s : %d logement(s) récupéré(s)", search_url.split("/tools/")[-1], len(listings))
+            logging.info(
+                "Recherche %s : %d logement(s) récupéré(s)",
+                search_url.split("/tools/")[-1],
+                len(listings),
+            )
             current.update(listings)
             successful_searches += int(succeeded)
         except (requests.RequestException, ValueError, RuntimeError) as exc:
@@ -523,11 +546,22 @@ def main() -> int:
 
     if not state.get("initialized", False):
         seen.update(current)
-        save_state({"initialized": True, "seen": seen, "last_current": sorted(current)})
-        post_discord({
-            "username": "Alerte CROUS",
-            "content": f"✅ Surveillance activée : {len(current)} logement(s) déjà présent(s) mémorisé(s).",
-        })
+        save_state(
+            {
+                "initialized": True,
+                "seen": seen,
+                "last_current": sorted(current),
+            }
+        )
+        post_discord(
+            {
+                "username": "Alerte CROUS",
+                "content": (
+                    f"✅ Surveillance activée : {len(current)} logement(s) "
+                    "déjà présent(s) mémorisé(s)."
+                ),
+            }
+        )
         return 0
 
     new_ids = sorted(set(current) - set(seen))
@@ -538,7 +572,13 @@ def main() -> int:
         seen[item_id] = current[item_id]
         time.sleep(1)
 
-    save_state({"initialized": True, "seen": seen, "last_current": sorted(current)})
+    save_state(
+        {
+            "initialized": True,
+            "seen": seen,
+            "last_current": sorted(current),
+        }
+    )
     return 0
 
 
