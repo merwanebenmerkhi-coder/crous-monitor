@@ -29,7 +29,7 @@ logging.basicConfig(
 SESSION = requests.Session()
 SESSION.headers.update(
     {
-        "User-Agent": "CrousDiscordMonitor/4.0 (personal availability notifier)",
+        "User-Agent": "CrousDiscordMonitor/4.1 (personal availability notifier)",
         "Accept-Language": "fr-FR,fr;q=0.9,en;q=0.7",
         "Cache-Control": "no-cache",
     }
@@ -168,6 +168,7 @@ def parse_list_values(pairs: list[tuple[str, str]], key: str) -> list[str]:
 
 
 def parse_bounds(value: str | None) -> list[dict[str, float]] | None:
+    """Convert CROUS bounds=minLon_maxLat_maxLon_minLat into API SW/NE points."""
     if not value:
         return None
     parts = value.split("_")
@@ -176,10 +177,12 @@ def parse_bounds(value: str | None) -> list[dict[str, float]] | None:
     coords = [parse_float(part) for part in parts]
     if any(coord is None for coord in coords):
         return None
-    lon1, lat1, lon2, lat2 = coords
+
+    # Frontend format: minLon_maxLat_maxLon_minLat.
+    min_lon, max_lat, max_lon, min_lat = coords
     return [
-        {"lon": lon1, "lat": lat1},
-        {"lon": lon2, "lat": lat2},
+        {"lon": min_lon, "lat": min_lat},
+        {"lon": max_lon, "lat": max_lat},
     ]
 
 
@@ -192,23 +195,18 @@ def build_api_body(search_url: str, tool_id: int, page_number: int) -> dict:
     bounds_value = next((value for key, value in query_pairs if key == "bounds"), None)
     bounds = parse_bounds(bounds_value)
 
-    price_min = (
-        parse_float(next((value for key, value in query_pairs if key == "priceMin"), None))
-        or parse_float(next((value for key, value in query_pairs if key == "minPrice"), None))
-    )
-    price_max = (
-        parse_float(next((value for key, value in query_pairs if key == "priceMax"), None))
-        or parse_float(next((value for key, value in query_pairs if key == "maxPrice"), None))
-    )
+    def first_number(*keys: str) -> float | None:
+        for key in keys:
+            raw = next((value for current_key, value in query_pairs if current_key == key), None)
+            number = parse_float(raw)
+            if number is not None:
+                return number
+        return None
 
-    surface_min = (
-        parse_float(next((value for key, value in query_pairs if key == "surfaceMin"), None))
-        or parse_float(next((value for key, value in query_pairs if key == "minSurface"), None))
-    )
-    surface_max = (
-        parse_float(next((value for key, value in query_pairs if key == "surfaceMax"), None))
-        or parse_float(next((value for key, value in query_pairs if key == "maxSurface"), None))
-    )
+    price_min = first_number("priceMin", "minPrice")
+    price_max = first_number("priceMax", "maxPrice")
+    surface_min = first_number("surfaceMin", "minSurface")
+    surface_max = first_number("surfaceMax", "maxSurface")
 
     accessibility = parse_bool(
         next((value for key, value in query_pairs if key == "accessibility"), None)
@@ -217,7 +215,13 @@ def build_api_body(search_url: str, tool_id: int, page_number: int) -> dict:
     if accessibility is None:
         accessibility = pmr
 
-    # The search box can appear under several names depending on the CROUS frontend version.
+    # locationName is the frontend's human-readable label for the selected area.
+    # The actual geographic constraint is encoded in bounds, which is what the API uses.
+    location_name = next(
+        (value for key, value in query_pairs if key == "locationName" and value),
+        None,
+    )
+
     search_text = next(
         (
             value
@@ -226,8 +230,6 @@ def build_api_body(search_url: str, tool_id: int, page_number: int) -> dict:
         ),
         None,
     )
-
-    # Current and older frontend versions use "sector" for the textual location filter.
     sector = search_text
 
     body: dict = {
@@ -246,17 +248,12 @@ def build_api_body(search_url: str, tool_id: int, page_number: int) -> dict:
         "location": bounds,
     }
 
-    # Newer API versions accept an area range. Keep it out when the URL has no area filter.
     if surface_min is not None or surface_max is not None:
-        body["area"] = {
-            "min": surface_min,
-            "max": surface_max,
-        }
+        body["area"] = {"min": surface_min, "max": surface_max}
 
     if accessibility is not None:
         body["accessibility"] = accessibility
 
-    # These are harmless API hints used by some deployments; omit them when not present in the URL.
     for url_key, body_key, caster in (
         ("precision", "precision", parse_int),
         ("pageSize", "pageSize", parse_int),
@@ -282,6 +279,7 @@ def build_api_body(search_url: str, tool_id: int, page_number: int) -> dict:
         "accessibility",
         "pmr",
         "accessible",
+        "locationName",
         "query",
         "search",
         "q",
@@ -298,13 +296,14 @@ def build_api_body(search_url: str, tool_id: int, page_number: int) -> dict:
         )
 
     logging.info(
-        "Filtres API construits depuis l'URL : modes=%s bounds=%s price=%s area=%s accessibility=%s sector=%s",
+        "Filtres API construits depuis l'URL : modes=%s bounds=%s price=%s area=%s accessibility=%s sector=%s locationName=%s",
         body["occupationModes"],
-        bool(body.get("location")),
+        body.get("location"),
         body["price"],
         body.get("area"),
         body.get("accessibility"),
         body.get("sector"),
+        location_name,
     )
     return body
 
