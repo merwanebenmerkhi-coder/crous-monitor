@@ -8,7 +8,7 @@ import re
 import sys
 import time
 from pathlib import Path
-from urllib.parse import parse_qsl, urlencode, urljoin, urlsplit, urlunsplit
+from urllib.parse import parse_qsl, unquote, urljoin, urlsplit, urlunsplit
 
 import requests
 from bs4 import BeautifulSoup
@@ -29,7 +29,7 @@ logging.basicConfig(
 SESSION = requests.Session()
 SESSION.headers.update(
     {
-        "User-Agent": "CrousDiscordMonitor/3.0 (personal availability notifier)",
+        "User-Agent": "CrousDiscordMonitor/4.0 (personal availability notifier)",
         "Accept-Language": "fr-FR,fr;q=0.9,en;q=0.7",
         "Cache-Control": "no-cache",
     }
@@ -62,11 +62,11 @@ def clean_text(text: str) -> str:
 
 def add_page_parameter(url: str, page: int) -> str:
     parts = urlsplit(url)
-    query = dict(parse_qsl(parts.query, keep_blank_values=True))
-    query["page"] = str(page)
-    return urlunsplit(
-        (parts.scheme, parts.netloc, parts.path, urlencode(query), parts.fragment)
-    )
+    pairs = parse_qsl(parts.query, keep_blank_values=True)
+    pairs = [(key, value) for key, value in pairs if key != "page"]
+    pairs.append(("page", str(page)))
+    query = "&".join(f"{key}={value}" for key, value in pairs)
+    return urlunsplit((parts.scheme, parts.netloc, parts.path, query, parts.fragment))
 
 
 def listing_id(url: str) -> str:
@@ -130,6 +130,185 @@ def extract_tool_id(search_url: str) -> int | None:
     return int(match.group(1)) if match else None
 
 
+def parse_float(value: str | None) -> float | None:
+    if value is None or value == "":
+        return None
+    try:
+        return float(value.replace(",", "."))
+    except ValueError:
+        return None
+
+
+def parse_int(value: str | None) -> int | None:
+    number = parse_float(value)
+    return int(number) if number is not None else None
+
+
+def parse_bool(value: str | None) -> bool | None:
+    if value is None:
+        return None
+    value = value.strip().lower()
+    if value in {"1", "true", "yes", "on"}:
+        return True
+    if value in {"0", "false", "no", "off"}:
+        return False
+    return None
+
+
+def parse_list_values(pairs: list[tuple[str, str]], key: str) -> list[str]:
+    values: list[str] = []
+    for current_key, value in pairs:
+        if current_key != key or value == "":
+            continue
+        for part in value.split(","):
+            part = unquote(part).strip()
+            if part and part not in values:
+                values.append(part)
+    return values
+
+
+def parse_bounds(value: str | None) -> list[dict[str, float]] | None:
+    if not value:
+        return None
+    parts = value.split("_")
+    if len(parts) != 4:
+        return None
+    coords = [parse_float(part) for part in parts]
+    if any(coord is None for coord in coords):
+        return None
+    lon1, lat1, lon2, lat2 = coords
+    return [
+        {"lon": lon1, "lat": lat1},
+        {"lon": lon2, "lat": lat2},
+    ]
+
+
+def build_api_body(search_url: str, tool_id: int, page_number: int) -> dict:
+    """Convert the CROUS search URL query parameters into the API request body."""
+    query_pairs = parse_qsl(urlsplit(search_url).query, keep_blank_values=True)
+
+    occupation_modes = parse_list_values(query_pairs, "occupationModes")
+    equipment = parse_list_values(query_pairs, "equipment")
+    bounds_value = next((value for key, value in query_pairs if key == "bounds"), None)
+    bounds = parse_bounds(bounds_value)
+
+    price_min = (
+        parse_float(next((value for key, value in query_pairs if key == "priceMin"), None))
+        or parse_float(next((value for key, value in query_pairs if key == "minPrice"), None))
+    )
+    price_max = (
+        parse_float(next((value for key, value in query_pairs if key == "priceMax"), None))
+        or parse_float(next((value for key, value in query_pairs if key == "maxPrice"), None))
+    )
+
+    surface_min = (
+        parse_float(next((value for key, value in query_pairs if key == "surfaceMin"), None))
+        or parse_float(next((value for key, value in query_pairs if key == "minSurface"), None))
+    )
+    surface_max = (
+        parse_float(next((value for key, value in query_pairs if key == "surfaceMax"), None))
+        or parse_float(next((value for key, value in query_pairs if key == "maxSurface"), None))
+    )
+
+    accessibility = parse_bool(
+        next((value for key, value in query_pairs if key == "accessibility"), None)
+    )
+    pmr = parse_bool(next((value for key, value in query_pairs if key in {"pmr", "accessible"}), None))
+    if accessibility is None:
+        accessibility = pmr
+
+    # The search box can appear under several names depending on the CROUS frontend version.
+    search_text = next(
+        (
+            value
+            for key, value in query_pairs
+            if key in {"query", "search", "q", "keyword", "city"} and value
+        ),
+        None,
+    )
+
+    # Current and older frontend versions use "sector" for the textual location filter.
+    sector = search_text
+
+    body: dict = {
+        "precision": 5,
+        "need_aggregation": False,
+        "page": page_number,
+        "pageSize": 100,
+        "sector": sector,
+        "idTool": tool_id,
+        "occupationModes": occupation_modes or ["alone", "couple", "house_sharing"],
+        "equipment": equipment,
+        "price": {
+            "min": int(round(price_min * 100)) if price_min is not None else 0,
+            "max": int(round(price_max * 100)) if price_max is not None else None,
+        },
+        "location": bounds,
+    }
+
+    # Newer API versions accept an area range. Keep it out when the URL has no area filter.
+    if surface_min is not None or surface_max is not None:
+        body["area"] = {
+            "min": surface_min,
+            "max": surface_max,
+        }
+
+    if accessibility is not None:
+        body["accessibility"] = accessibility
+
+    # These are harmless API hints used by some deployments; omit them when not present in the URL.
+    for url_key, body_key, caster in (
+        ("precision", "precision", parse_int),
+        ("pageSize", "pageSize", parse_int),
+    ):
+        raw = next((value for key, value in query_pairs if key == url_key), None)
+        converted = caster(raw)
+        if converted is not None:
+            body[body_key] = converted
+
+    recognized = {
+        "page",
+        "occupationModes",
+        "bounds",
+        "equipment",
+        "priceMin",
+        "priceMax",
+        "minPrice",
+        "maxPrice",
+        "surfaceMin",
+        "surfaceMax",
+        "minSurface",
+        "maxSurface",
+        "accessibility",
+        "pmr",
+        "accessible",
+        "query",
+        "search",
+        "q",
+        "keyword",
+        "city",
+        "precision",
+        "pageSize",
+    }
+    unknown = sorted({key for key, _ in query_pairs if key not in recognized})
+    if unknown:
+        logging.warning(
+            "Paramètres CROUS non reconnus et non transmis à l'API : %s",
+            ", ".join(unknown),
+        )
+
+    logging.info(
+        "Filtres API construits depuis l'URL : modes=%s bounds=%s price=%s area=%s accessibility=%s sector=%s",
+        body["occupationModes"],
+        bool(body.get("location")),
+        body["price"],
+        body.get("area"),
+        body.get("accessibility"),
+        body.get("sector"),
+    )
+    return body
+
+
 def api_listing(item: dict, search_url: str, tool_id: int) -> dict | None:
     item_id = item.get("id")
     residence = item.get("residence") or {}
@@ -191,21 +370,7 @@ def fetch_api_search(search_url: str) -> dict[str, dict]:
     found: dict[str, dict] = {}
 
     for page_number in range(1, MAX_PAGES + 1):
-        body = {
-            "precision": 5,
-            "need_aggregation": False,
-            "page": page_number,
-            "pageSize": 100,
-            "sector": None,
-            "idTool": tool_id,
-            "occupationModes": ["alone", "couple", "house_sharing"],
-            "equipment": [],
-            "price": {"min": 0, "max": None},
-            "location": [
-                {"lon": -5.2, "lat": 51.2},
-                {"lon": 9.7, "lat": 41.2},
-            ],
-        }
+        body = build_api_body(search_url, tool_id, page_number)
         response = SESSION.post(
             endpoint,
             json=body,
@@ -214,15 +379,21 @@ def fetch_api_search(search_url: str) -> dict[str, dict]:
         )
         response.raise_for_status()
         data = response.json()
-        items = ((data.get("results") or {}).get("items") or [])
-        logging.info("API CROUS tool=%s page=%s : %d logement(s)", tool_id, page_number, len(items))
+        results = data.get("results") or {}
+        items = results.get("items") or []
+        logging.info(
+            "API CROUS tool=%s page=%s : %d logement(s)",
+            tool_id,
+            page_number,
+            len(items),
+        )
 
         for raw_item in items:
             item = api_listing(raw_item, search_url, tool_id)
             if item:
                 found[item["uid"]] = item
 
-        total = (data.get("results") or {}).get("total")
+        total = results.get("total")
         if not items or (isinstance(total, int) and len(found) >= total):
             break
         time.sleep(REQUEST_DELAY_SECONDS)
@@ -348,7 +519,11 @@ def main() -> int:
     for search_url in get_search_urls():
         try:
             listings, succeeded = fetch_search(search_url)
-            logging.info("Recherche %s : %d logement(s) récupéré(s)", search_url.split("/tools/")[-1], len(listings))
+            logging.info(
+                "Recherche %s : %d logement(s) récupéré(s)",
+                search_url.split("/tools/")[-1],
+                len(listings),
+            )
             current.update(listings)
             successful_searches += int(succeeded)
         except (requests.RequestException, ValueError, RuntimeError) as exc:
