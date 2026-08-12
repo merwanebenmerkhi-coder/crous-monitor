@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: "*/5 * * * *"
   workflow_dispatch:
+    inputs:
+      test_ignore_occupation:
+        description: "Test temporaire : ignorer occupationModes"
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -38,6 +44,7 @@ jobs:
           CROUS_SEARCH_URLS: ${{ secrets.CROUS_SEARCH_URLS }}
           MAX_PAGES: "10"
           REQUEST_DELAY_SECONDS: "1.2"
+          TEST_IGNORE_OCCUPATION: ${{ inputs.test_ignore_occupation || false }}
         run: python monitor.py
 
       - name: Sauvegarder l'historique si nécessaire
